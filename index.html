@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BAGRA-NET</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#000;color:#fff;height:100vh;overflow:hidden}
+.top{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:rgba(0,0,0,.9);z-index:10;border-bottom:1px solid #222}
+.logo{font-weight:900;color:#00E5FF;font-size:18px}
+.btn{padding:6px 12px;border-radius:20px;font-size:11px;font-weight:700}
+.btn1{border:1.5px solid #00E5FF;background:transparent;color:#00E5FF}
+.btn2{background:#00E5FF;border:none;color:#000}
+.post{height:100vh;position:relative;background:#111}
+.post img{width:100%;height:100%;object-fit:cover}
+.actions{position:absolute;right:10px;bottom:90px;display:flex;flex-direction:column;gap:12px}
+.icon{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center}
+.info{position:absolute;left:12px;bottom:75px;right:65px}
+.bottom{position:fixed;bottom:0;width:100%;background:#111;display:flex;justify-content:space-around;padding:8px 4px 12px;border-radius:14px 14px 0 0;border-top:1px solid #222}
+.plus{width:50px;height:38px;background:#0096FF;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-top:-6px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:50;align-items:center;justify-content:center;padding:15px}
+.modal.show{display:flex}
+.box{background:#1a1a1a;border:1px solid #333;border-radius:14px;padding:18px;width:100%;max-width:320px}
+.input{width:100%;padding:10px;border-radius:8px;border:1px solid #333;background:#0e0e0e;color:#fff;margin-bottom:8px;font-size:14px}
+.btnMain{width:100%;padding:11px;border-radius:8px;background:#00E5FF;color:#000;font-weight:800;border:none}
+</style>
+</head>
+<body>
+<div class="top">
+<div class="logo">BG BAGRA-NET</div>
+<div style="display:flex;gap:6px">
+<button class="btn btn1" onclick="document.getElementById('login').classList.add('show')">Se connecter</button>
+<button class="btn btn2" onclick="document.getElementById('signup').classList.add('show')">S'inscrire</button>
+</div>
+</div>
+<div class="post">
+<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800" id="coverImg">
+<div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.8) 100%)"></div>
+<div class="actions">
+<div><div class="icon">❤️</div><div style="font-size:10px;margin-top:3px">12.4K</div></div>
+<div><div class="icon">💬</div><div style="font-size:10px">348</div></div>
+<div><div class="icon">↗</div><div style="font-size:10px">1.2K</div></div>
+</div>
+<div class="info">
+<b id="handle">@adorateur_abraham</b><br>
+<small>Nouvelle vidéo 🔥 Merci pour le soutien! #BAGRA</small><br>
+<button onclick="document.getElementById('coverInput').click()" style="margin-top:8px;padding:5px 10px;border-radius:15px;border:1px solid #00E5FF;background:rgba(0,0,0,.6);color:#00E5FF;font-size:10px">✏️ Modifier couverture</button>
+</div>
+</div>
+<div class="bottom">
+<div onclick="alert('Accueil')" style="opacity:1;color:#00E5FF;text-align:center">⌂<br><small style="font-size:9px">Accueil</small></div>
+<div style="opacity:.5;text-align:center">🖼️<br><small style="font-size:9px">Galerie</small></div>
+<div onclick="document.getElementById('postM').classList.add('show')"><div class="plus">+</div></div>
+<div style="opacity:.5;text-align:center">💰<br><small style="font-size:9px">Argent</small></div>
+<div onclick="document.getElementById('profile').classList.add('show')" style="opacity:.5;text-align:center">👤<br><small style="font-size:9px">Profil</small></div>
+</div>
+
+<div class="modal" id="login"><div class="box"><div style="float:right" onclick="this.parentElement.parentElement.classList.remove('show')">✕</div><h3>Se connecter</h3><br><input class="input" id="le" placeholder="Email ou @pseudo"><input class="input" type="password" id="lp" placeholder="Mot de passe"><button class="btnMain" onclick="alert('✅ Connecté: '+document.getElementById('le').value);document.getElementById('login').classList.remove('show');document.getElementById('handle').innerText=document.getElementById('le').value">Se connecter</button></div></div>
+<div class="modal" id="signup"><div class="box"><div style="float:right" onclick="this.parentElement.parentElement.classList.remove('show')">✕</div><h3>S'inscrire</h3><br><input class="input" id="sn" placeholder="Nom complet"><input class="input" id="sh" placeholder="@pseudo"><input class="input" id="se" placeholder="Email"><button class="btnMain" onclick="alert('🎉 Bienvenue '+document.getElementById('sn').value);document.getElementById('signup').classList.remove('show');document.getElementById('handle').innerText=document.getElementById('sh').value">S'inscrire →</button></div></div>
+<div class="modal" id="profile"><div class="box"><div style="float:right" onclick="this.parentElement.parentElement.classList.remove('show')">✕</div><h3>Profil</h3><br><div style="display:flex;gap:10px;align-items:center;margin-bottom:10px"><img id="avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200" style="width:60px;height:60px;border-radius:50%"><div><button onclick="document.getElementById('avatarInput').click()" style="padding:6px 10px;border-radius:8px;border:1px solid #00E5FF;background:none;color:#00E5FF;font-size:11px">Changer photo profil</button></div></div><input class="input" id="en" placeholder="Nouveau nom"><input class="input" id="eh" placeholder="Nouveau @pseudo"><button class="btnMain" onclick="if(document.getElementById('eh').value)document.getElementById('handle').innerText=document.getElementById('eh').value;alert('✅ Profil modifié!');document.getElementById('profile').classList.remove('show')">Enregistrer ✅</button></div></div>
+<div class="modal" id="postM"><div class="box"><div style="float:right" onclick="this.parentElement.parentElement.classList.remove('show')">✕</div><h3>Nouveau post</h3><br><button onclick="document.getElementById('postInput').click()" style="width:100%;padding:20px;border:2px dashed #333;border-radius:10px;background:none;color:#fff">📸 Choisir photo</button><input class="input" placeholder="Légende #BAGRA" style="margin-top:10px"><button class="btnMain" onclick="alert('🚀 Publié!');document.getElementById('postM').classList.remove('show')">Publier</button></div></div>
+
+<input type="file" id="coverInput" accept="image/*" style="display:none" onchange="changeCover(event)">
+<input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="changeAvatar(event)">
+<input type="file" id="postInput" accept="image/*" style="display:none">
+
+<script>
+function changeCover(e){let f=e.target.files[0];let r=new FileReader();r.onload=function(ev){document.getElementById('coverImg').src=ev.target.result;alert('✅ Couverture changée!')};r.readAsDataURL(f)}
+function changeAvatar(e){let f=e.target.files[0];let r=new FileReader();r.onload=function(ev){document.getElementById('avatar').src=ev.target.result;alert('✅ Photo profil changée!')};r.readAsDataURL(f)}
+</script>
+</body>
+  </html>
