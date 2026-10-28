@@ -96,7 +96,31 @@ async function startCall(video){try{let s=await navigator.mediaDevices.getUserMe
 function startGroupCall(){alert('👥 Lien groupe: bagra-net.com/call/'+Math.random().toString(36).substring(7)); startCall(true)}
 async function goLive(){try{let s=await navigator.mediaDevices.getUserMedia({video:true,audio:true}); let v=document.getElementById('liveVid'); v.style.display='block'; v.srcObject=s; document.getElementById('liveChat').innerHTML+='<br><b>🔴 Vous êtes en LIVE!</b>'}catch(e){alert('Caméra bloquée')}}
 function sendLiveChat(){let m=document.getElementById('liveMsg').value; if(!m) return; document.getElementById('liveChat').innerHTML+=`<br><b>${user?user.pseudo:'Vous'}:</b> ${m}`; document.getElementById('liveMsg').value=''; if(Math.random()>0.5){balance+=100; localStorage.setItem('bg_balance',balance); document.getElementById('balance').innerText=balance; document.getElementById('liveChat').innerHTML+=`<br><span style="color:#00E5FF">🎁 Cadeau reçu +100 FC!</span>`}}
-window.onload=init;
+window.onload=init;function openSettings(){
+  let html = `
+  <div id="settingsModal" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:flex;justify-content:center;align-items:center">
+    <div style="background:white;padding:20px;border-radius:15px;width:90%;max-width:350px;text-align:center">
+      <h3>⚙️ PARAMETRES</h3>
+      <button onclick="changePseudo()" style="width:100%;padding:12px;margin:5px;border-radius:8px">✏️ Changer Pseudo</button>
+      <button onclick="changeTheme()" style="width:100%;padding:12px;margin:5px;border-radius:8px">🌙 Mode Sombre/Clair</button>
+      <button onclick="deconnexion()" style="width:100%;padding:12px;margin:5px;background:red;color:white;border-radius:8px">🚪 Déconnexion</button>
+      <button onclick="document.getElementById('settingsModal').remove()" style="width:100%;padding:10px;margin-top:10px">❌ Fermer</button>
+    </div>
+  </div>`;
+  document.body.insertAdjacentHTML('beforeend', html);
+}
+function changePseudo(){
+  let np = prompt('Nouveau Pseudo:');
+  if(np){ user.pseudo=np; user.name=np; localStorage.setItem('babile_user', JSON.stringify(user)); alert('Pseudo changé en: '+np); location.reload(); }
+}
+function changeTheme(){
+  document.body.style.background = document.body.style.background=='black' ? 'white' : 'black';
+  document.body.style.color = document.body.style.background=='black' ? 'white' : 'black';
+  alert('Thème changé!');
+}
+function deconnexion(){
+  if(confirm('Vraiment quitter?')){ localStorage.removeItem('babile_user'); location.reload(); }
+}
 </script>
 </body>
 </html>
